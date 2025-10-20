@@ -1,0 +1,90 @@
+scenario_name: "Operation Nordpass"
+scenario_type: "tactical"
+description: "Territorialer Konflikt um strategischen Grenzübergang in bergigem Terrain"
+
+player_blue:
+  role: "Verteidiger - Verstärkte Kompanie Nordland-Streitkräfte"
+  objective: "Halte den strategischen Grenzübergang Nordpass und sichere die Stadt Bergheim"
+
+  forces:
+    infantry: "2 Züge mechanisierte Infanterie (je 30 Mann, 4 SPz pro Zug)"
+    armor: "1 Panzergruppe (4 moderne Kampfpanzer)"
+    recon: "1 Drohnenteam (2 taktische Aufklärungsdrohnen)"
+    artillery: "1 Mörserzug (4x 120mm Mörser, Reichweite ~7km)"
+    special: "1 Aufklärungstrupp (6 Mann Spezialkräfte)"
+    logistics: "Nachschub für 72 Stunden gesichert"
+
+  constraints:
+    - "Minimiere zivile Opfer in Bergheim"
+    - "NATO-Beobachter vor Ort - internationale Aufmerksamkeit"
+    - "Keine Erstangriffe über die Grenze hinaus"
+    - "Halte dich an Regeln des bewaffneten Konflikts"
+
+  initial_position:
+    - "Kompanie-Gefechtsstand in Bergheim"
+    - "Verteidigungsstellungen teilweise vorbereitet"
+    - "Höhe 517 noch nicht besetzt"
+    - "Nordpass-Durchgang offen"
+
+player_red:
+  role: "Angreifer - Motorisiertes Bataillon"
+  objective: "Erobere Nordpass, schneide Blaue von Versorgung ab, nimm Bergheim"
+
+  forces:
+    infantry: "3 motorisierte Kompanien (je 120 Mann, 12 Fahrzeuge)"
+    armor: "1 Panzergruppe (6 Kampfpanzer älterer Bauart)"
+    artillery: "1 Artilleriebatterie (6x 155mm, Reichweite ~20km)"
+    special: "1 Sabotageeinheit (8 Mann)"
+    cyber: "Team für elektronische Kriegsführung"
+    air_defense: "2 mobile Flugabwehrsysteme"
+    logistics: "Nachschub für 48 Stunden"
+
+  constraints:
+    - "Zeitdruck: Offensive muss innerhalb 24-48h Erfolg zeigen"
+    - "Vermeide Massaker an Zivilisten (internationale PR-Folgen)"
+    - "Keine Luftüberlegenheit - bleibe getarnt"
+
+  initial_position:
+    - "20km südlich des Nordpasses konzentriert"
+    - "Anmarsch in Vorbereitung"
+    - "Starke elektronische Aktivität registriert"
+
+terrain:
+  - "Nordpass: Engstelle zwischen Bergen, nur 2km breit, dominiert Zugang"
+  - "Bergheim: Stadt mit 15.000 Einwohnern, teilweise evakuiert, strategisch wichtig"
+  - "Höhe 517: Dominierender Hügel östlich des Passes (300m Höhenvorteil)"
+  - "Waldgebiet West: Ermöglicht verdeckte Annäherung, dichter Baumbestand"
+  - "Fluss Nordbach: Muss von Süden kommend überquert werden, 3 Brücken vorhanden"
+  - "Bergstraße: Einzige befestigte Verbindung nach Norden"
+
+critical_infrastructure:
+  - "Kraftwerk bei Bergheim (versorgt Region)"
+  - "Kommunikationstürme auf Höhe 517"
+  - "3 Brücken über Nordbach (Nord, Mitte, Süd)"
+  - "Bahnlinie nach Norden (aktuell nicht in Betrieb)"
+
+special_factors:
+  - "Zivilbevölkerung teilweise noch in Bergheim präsent"
+  - "NATO-Beobachter dokumentieren alle Aktionen"
+  - "Wetter: Momentan klar, Wetteränderung möglich"
+  - "Elektronische Kriegsführung durch Rote möglich"
+  - "Internationale Medien vor Ort"
+  - "Politische Verhandlungen laufen parallel"
+
+intelligence_situation:
+  blue_knows:
+    - "Rote Kräfte 20km südlich konzentriert"
+    - "Vermutete Stärke: Bataillon (ca. 400 Mann)"
+    - "Starke elektronische Aktivität registriert"
+    - "Angriff innerhalb 24-48h erwartet"
+
+  red_knows:
+    - "Blaue Kräfte verschanzen sich am Nordpass"
+    - "Vermutete Stärke: Kompanie+ (150-200 Mann)"
+    - "Bergheim teilweise noch bewohnt"
+    - "NATO-Beobachter anwesend"
+
+victory_conditions:
+  - "Keine festen Siegbedingungen - realistische Simulation"
+  - "Ende durch: Verhandlung, Kapitulation, Erschöpfung, oder Deeskalation"
+  - "Fokus auf realistische taktische Entscheidungsfindung"

@@ -1,0 +1,58 @@
+scenario_name: "MANV - Verkehrsunfall auf der Autobahn"
+scenario_type: "notfallmedizin"
+description: "Massenanfall von Verletzten nach Auffahrunfall mit 3 PKW und 1 Kleinbus"
+
+max_turns: 8  # Notfall = schnelle Abfolge
+
+team:
+  role: "Einsatzleiter Rettungsdienst (Notfallsanitäter)"
+  objective: "Sichte und versorge alle Verletzten, koordiniere Rettungskräfte, organisiere Transport"
+
+  resources:
+    personal: "Du + 1 Notfallsanitäter, 1 Rettungssanitäter"
+    fahrzeuge: "1 RTW (Rettungswagen) vor Ort, weitere RTWs/NEFs auf Anfahrt"
+    material: "Standard RTW-Ausrüstung (Notfallkoffer, Trage, Schaufeltrage, HWS, Sauerstoff)"
+    kommunikation: "Funkgerät zur Leitstelle, Handy"
+    nachforderung: "Weitere RTWs, NEF (Notarzteinsatzfahrzeug), Hubschrauber möglich"
+
+  constraints:
+    - "Eigenschutz geht vor (Absicherung Unfallstelle)"
+    - "Sichtung nach ABCDE-Schema bzw. Sichtungskategorien"
+    - "Dokumentationspflicht"
+    - "Kommunikation mit Leitstelle obligatorisch"
+
+situation_details:
+  - "Unfallstelle: A7, Fahrtrichtung Süd, km 245"
+  - "Wetter: Nieselregen, schlechte Sicht, Rutschgefahr"
+  - "Verkehr: Stockend, Gaffer bremsen"
+  - "Zeit: 14:30 Uhr (Berufsverkehr beginnt)"
+
+initial_situation:
+  - "Du triffst als erstes Rettungsmittel ein"
+  - "3 PKW ineinander, 1 Kleinbus seitlich gekippt"
+  - "Mindestens 8-10 Personen sichtbar verletzt"
+  - "Mehrere Personen schreien um Hilfe"
+  - "1 Person liegt regungslos auf Fahrbahn"
+  - "Aus einem PKW tropft Benzin"
+  - "Polizei noch nicht vor Ort"
+
+injuries_spectrum:
+  - "1-2 Schwerverletzte (rot)"
+  - "3-4 Mittelschwerverletzte (gelb)"
+  - "3-4 Leichtverletzte (grün)"
+  - "Mögliche Tote (schwarz)"
+
+special_challenges:
+  - "Zeitdruck - schwer Verletzte brauchen sofortige Versorgung"
+  - "Ressourcenmangel - zu wenig Personal für zu viele Patienten"
+  - "Absicherung fehlt - Eigenschutz gefährdet"
+  - "Dokumentation vs. Versorgung - Priorisierungskonflikt"
+  - "Angehörige/Gaffer - emotionale Belastung, Behinderung"
+
+success_criteria:
+  - "Korrekte Sichtung aller Patienten"
+  - "Priorisierung nach Dringlichkeit"
+  - "Effektive Ressourcen-Nachforderung"
+  - "Strukturierte Kommunikation mit Leitstelle"
+  - "Eigenschutz nicht vergessen"
+  - "Dokumentation nicht vernachlässigt"

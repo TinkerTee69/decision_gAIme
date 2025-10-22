@@ -1,0 +1,64 @@
+scenario_name: "Razzia - Drogenlabor in Wohngebiet"
+scenario_type: "polizei_operation"
+description: "Durchsuchung eines vermuteten Drogenlabors in einem Mehrfamilienhaus"
+
+max_turns: 10
+
+team:
+  role: "Einsatzleiter Razzia-Team (Polizeikommissar)"
+  objective: "Sichere Durchführung der Razzia, Festnahme Verdächtiger, Beweissicherung, Schutz Unbeteiligter"
+
+  resources:
+    personal: "1 SEK-Team (6 Beamte), 8 Kriminalbeamte, 4 Streifenbeamte, 1 Diensthundeführer"
+    ausruestung: "Schutzausrüstung, Durchsuchungsbefehl, Spurensicherungskoffer, Ramme"
+    fahrzeuge: "3 zivile Fahrzeuge, 2 Streifenwagen"
+    kommunikation: "Digitalfunk, verschlüsselte Kanäle"
+    unterstuetzung: "Feuerwehr (auf Abruf), Rettungsdienst (Bereitschaft)"
+
+  constraints:
+    - "Durchsuchungsbefehl muss vorgezeigt werden"
+    - "Verhältnismäßigkeit wahren"
+    - "Unbeteiligte Bewohner schützen"
+    - "Beweissicherung dokumentieren (Kette)"
+    - "Eigensicherung - mögliche Waffen/Chemikalien"
+
+situation_details:
+  - "Objekt: 4. OG, Mehrfamilienhaus, Bahnhofstraße 23"
+  - "Zeit: 06:00 Uhr (Zugriffszeitpunkt geplant)"
+  - "Wetter: Dunkel, leichter Nebel"
+  - "Umgebung: Wohngebiet, Schulweg in 100m Entfernung"
+
+initial_situation:
+  - "Observation seit 3 Tagen - 2-3 Personen im Objekt vermutet"
+  - "Verdacht: Crystal Meth Labor"
+  - "Vorstrafen der Verdächtigen: Btm-Handel, gefährliche Körperverletzung"
+  - "Im Haus wohnen 12 Parteien, ca. 30 Personen"
+  - "1 Fluchtweg: Hinterhof mit Zugang zu Parallelstraße"
+  - "Nachbarn haben 'chemischen Geruch' gemeldet"
+
+known_risks:
+  - "Möglicherweise bewaffnete Verdächtige"
+  - "Chemikalien - Brand-/Explosionsgefahr"
+  - "Fluchtgefahr über Hinterhof oder Nachbarwohnung"
+  - "Beweismittelvernichtung möglich"
+  - "Unbeteiligte Bewohner könnten gefährdet werden"
+
+unknowns:
+  - "Genaue Anzahl Personen im Objekt"
+  - "Bewaffnung der Verdächtigen unklar"
+  - "Zustand des Labors (aktiv? explosiv?)"
+  - "Kinder im Haus?"
+
+special_challenges:
+  - "Zeitdruck vs. Sicherheit"
+  - "SEK-Einsatz vs. zivile Bewohner"
+  - "Beweissicherung vs. Eigensicherung"
+  - "Medieninteresse (Wohngebiet)"
+  - "Mögliche Geiselnahme"
+
+success_criteria:
+  - "Keine Verletzten (Einsatzkräfte, Verdächtige, Unbeteiligte)"
+  - "Erfolgreiche Festnahme"
+  - "Beweissicherung ohne Kontamination"
+  - "Professionelle Kommunikation mit Bewohnern"
+  - "Saubere Durchführung (rechtlich einwandfrei)"

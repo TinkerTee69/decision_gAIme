@@ -1,0 +1,67 @@
+scenario_name: "Wohnungsbrand mit Menschenrettung"
+scenario_type: "feuerwehr_brandeinsatz"
+description: "Brand in Mehrfamilienhaus mit vermissten Personen"
+
+max_turns: 12
+
+team:
+  role: "Einsatzleiter Feuerwehr (Brandmeister)"
+  objective: "Menschenrettung, Brandbekämpfung, Ausbreitung verhindern"
+
+  resources:
+    personal: "9 Einsatzkräfte (1 Gruppenführer, 2 Trupps, 1 Maschinist, 1 Melder)"
+    fahrzeuge: "1 HLF (Hilfeleistungslöschfahrzeug), 1 DLK (Drehleiter) auf Anfahrt"
+    ausruestung: "PA (Pressluftatmer), Schläuche, Strahlrohre, Wärmebildkamera, Rettungsgeräte"
+    wasser: "800L Tank, Hydrant in 50m Entfernung"
+    nachforderung: "Weitere Löschzüge, Rettungsdienst, Polizei"
+
+  constraints:
+    - "Menschenrettung hat Priorität"
+    - "Atemschutzüberwachung obligatorisch"
+    - "Eigenschutz beachten (Einsturzgefahr)"
+    - "Nachbargebäude schützen"
+
+situation_details:
+  - "Objekt: 3-geschossiges Mehrfamilienhaus, Altbau (Baujahr 1920)"
+  - "Zeit: 03:15 Uhr (Nacht)"
+  - "Wetter: Windstärke 4, trocken"
+  - "Brandort: 2. OG, Wohnung Mitte"
+
+initial_situation:
+  - "Notruf: 'Es brennt, Menschen in Gefahr!'"
+  - "Bei Ankunft: Starke Rauchentwicklung aus 2 Fenstern (2. OG)"
+  - "Flammen schlagen aus 1 Fenster"
+  - "3 Personen am Fenster (3. OG) rufen um Hilfe"
+  - "1 ältere Frau schreit, ihr Mann sei noch in der Brandwohnung"
+  - "Bewohner im Treppenhaus auf der Flucht"
+  - "Brandmeldeanlage ausgefallen (Altbau)"
+
+building_info:
+  bewohner: "12 Wohnungen, ca. 25-30 Personen"
+  konstruktion: "Holzbalkendecken, enge Treppenhäuser, keine Brandschutztüren"
+  zugang: "1 Treppenhaus (verraucht), Hinterhof (eng)"
+  besonderheiten: "Dachboden durchgängig (Ausbreitungsgefahr!)"
+
+known_risks:
+  - "1 Person in Brandwohnung vermutet"
+  - "3 Personen am Fenster (3. OG) akut bedroht"
+  - "Treppenhaus stark verraucht - Fluchtweg blockiert"
+  - "Holzbalkendecken - Einsturzgefahr"
+  - "Wind treibt Rauch ins 3. OG"
+  - "Gaszähler im Keller"
+
+special_challenges:
+  - "Zeitdruck - Menschen in Gefahr"
+  - "Begrenzte Kräfte (DLK noch nicht da)"
+  - "Verrauchtes Treppenhaus"
+  - "Ausbreitung auf Dachboden möglich"
+  - "Panische Bewohner"
+  - "Wasserversorgung muss aufgebaut werden"
+
+success_criteria:
+  - "Alle Personen gerettet"
+  - "Brand unter Kontrolle"
+  - "Keine verletzten Einsatzkräfte"
+  - "Ausbreitung verhindert"
+  - "Strukturierte Einsatzabwicklung"
+  - "Atemschutzüberwachung durchgeführt"

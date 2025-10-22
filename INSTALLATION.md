@@ -1,12 +1,12 @@
-# Taktischer Simulator - Installationsanleitung
+# Notfall-Response Simulator - Installationsanleitung
 
 ## Voraussetzungen
 
 - **Windows 10/11** (oder Linux/Mac)
 - **Python 3.9+** installiert
 - **32GB RAM** (vorhanden ✅)
-- **NVIDIA RTX 4060 Ti** (vorhanden ✅)
-- **~20GB freier Festplattenspeicher** für die KI-Modelle
+- **NVIDIA RTX 4060 Ti** (vorhanden ✅) - optional, läuft auch auf CPU
+- **~10GB freier Festplattenspeicher** für beide KI-Modelle
 
 ---
 
@@ -26,7 +26,7 @@ ollama --version
 
 ---
 
-## Schritt 2: KI-Modelle herunterladen
+## Schritt 2: Beide KI-Modelle herunterladen
 
 Öffne ein Terminal (CMD oder PowerShell) und führe aus:
 
@@ -38,12 +38,12 @@ ollama pull mistral:7b
 ollama pull llama3.1:8b
 ```
 
-**⏱️ Dauer:** Je nach Internet ~15-30 Minuten
+**⏱️ Dauer:** Je nach Internet ~20-40 Minuten für beide
 
 ### Modelle testen:
 ```bash
-ollama run mistral:7b "Hallo, kannst du mich hören?"
-ollama run llama3.1:8b "Test erfolgreich?"
+ollama run mistral:7b "Test Assistenz-KI"
+ollama run llama3.1:8b "Test Simulator-KI"
 ```
 
 ---
@@ -83,9 +83,11 @@ pip install requests PyYAML
 Erstelle einen Ordner mit folgender Struktur:
 
 ```
-tactical_simulator/
-├── tactical_simulator.py      # Hauptprogramm
-├── scenario_config.yaml        # Szenario-Konfiguration
+emergency_simulator/
+├── emergency_simulator.py      # Hauptprogramm
+├── scenario_paramedic.yaml     # Notfallsanitäter-Szenario
+├── scenario_police_raid.yaml   # Polizei-Szenario
+├── scenario_fire.yaml          # Feuerwehr-Szenario
 ├── requirements.txt            # Python-Dependencies
 └── INSTALLATION.md             # Diese Anleitung
 ```
@@ -98,17 +100,21 @@ Kopiere alle bereitgestellten Dateien in diesen Ordner.
 
 ### Im Terminal:
 ```bash
-cd tactical_simulator
-python tactical_simulator.py
+cd emergency_simulator
+python emergency_simulator.py
 ```
 
 ### Wenn alles klappt, siehst du:
 ```
 ⚙️  Prüfe Ollama-Verbindung...
-✅ Ollama läuft!
+  → Teste Assistenz-KI (Mistral 7B)...
+  → Teste Simulator-KI (Llama 3.1 8B)...
+✅ Beide KI-Modelle bereit!
+
+⚠️  Testversion läuft noch XX Tage!
 
 ================================================================================
-   Operation Nordpass
+   MANV - Verkehrsunfall auf der Autobahn
 ================================================================================
 ...
 ```
@@ -136,13 +142,20 @@ curl http://localhost:11434
 
 ### Problem: "Model not found"
 
-**Lösung:** Modelle nochmal herunterladen:
+**Lösung:** Beide Modelle nochmal herunterladen:
 ```bash
 ollama pull mistral:7b
 ollama pull llama3.1:8b
 
 # Liste aller installierten Modelle:
 ollama list
+```
+
+**Sollte zeigen:**
+```
+NAME           ID              SIZE      MODIFIED
+mistral:7b     xxx...          4.4 GB    X minutes ago
+llama3.1:8b    yyy...          4.9 GB    X minutes ago
 ```
 
 ---
@@ -177,11 +190,20 @@ ollama pull mistral:3b
 ## Performance-Tipps
 
 ### GPU-Nutzung optimieren:
-Mit deiner RTX 4060 Ti sollten beide Modelle **parallel** auf der GPU laufen.
+Mit deiner RTX 4060 Ti (16GB VRAM) können BEIDE Modelle gut laufen:
+- Mistral 7B: ~4-5 GB VRAM
+- Llama 3.1 8B: ~5-6 GB VRAM
+- **Gesamt: ~10GB VRAM** - passt auf deine GPU!
 
 ### Erwartete Antwortzeiten:
-- **Assistenz-KI (Mistral 7B):** ~5-15 Sekunden
-- **Simulator-KI (Llama 3.1 8B):** ~10-20 Sekunden
+
+**GPU-Modus (mit NVIDIA-Treibern):**
+- **Assistenz-KI (Mistral 7B):** ~5-10 Sekunden
+- **Simulator-KI (Llama 3.1 8B):** ~10-15 Sekunden
+
+**CPU-Modus (Fallback):**
+- **Assistenz-KI:** ~20-40 Sekunden
+- **Simulator-KI:** ~30-60 Sekunden
 
 Wenn deutlich langsamer → GPU-Support prüfen!
 

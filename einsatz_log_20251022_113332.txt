@@ -1,0 +1,189 @@
+NOTFALL-RESPONSE SIMULATOR
+Szenario: Wohnungsbrand mit Menschenrettung
+================================================================================
+
+
+================================================================================
+ZUG #1 - 2025-10-22T11:25:12.619832
+================================================================================
+
+ENTSCHEIDUNG:
+
+LAGEEINSCHÄTZUNG:
+Kritische Lage: Wohnungsbrand 2. OG mit starker Rauchentwicklung in Altbau (Holzbalkendecken = Einsturzgefahr!). 3 Personen am Fenster 3. OG in akuter Lebensgefahr durch aufsteigenden Rauch - diese haben absolute Priorität! 1 Person vermisst in Brandwohnung. Treppenhaus stark verraucht = kein Fluchtweg für Bewohner. Ausbreitungsgefahr auf Dachboden durch durchgängige Holzkonstruktion. Wind treibt Rauch nach oben. Zeitkritisch - jede Minute zählt!
+
+PRIORITÄTEN:
+1. SOFORT: Menschenrettung 3. OG (3 Personen akut bedroht durch Rauch) 2. PARALLEL: Brandbekämpfung 2. OG zur Rettung des Vermissten 3. Ausbreitung auf Dachboden verhindern 4. Nachbargebäude schützen
+
+SOFORTMASSNAHMEN:
+TRUPP 1 (Angriffstrupp, 2 Mann mit PA): Sofort zur Brandbekämpfung 2. OG, gleichzeitig Suche nach vermisstem Mann. TRUPP 2 (2 Mann mit PA): Erkundet Treppenhaus 3. OG - kann man die 3 Personen schneller über Treppe retten oder muss Drehleiter abgewartet werden? Wenn möglich: Sofortige Rettung beginnen! MASCHINIST: Sofort Wasserversorgung zum Hydrant (50m) aufbauen. MELDER: Lagendurchsage an Leitstelle: "Kritische Lage, 3 Personen 3. OG in  Lebensgefahr, 1 vermisst, Altbau Holzbalken, benötige Rettungsdienst mit mehreren RTW, LNA, zweiten Löschzug." Dann SOFORT Atemschutzüberwachung aufbauen! GRUPPENFÜHRER (ich): Einsatzleitung, Lageerkundung, DLK einweisen sobald sie eintrifft, Reserven koordinieren. 2 MANN RESERVE: Bereitstellung für Rettung über Drehleiter, Material bereitstellen (Tragetücher, Leinen), Bewohner aus Nachbarwohnungen evakuieren.
+
+RESSOURCENEINSATZ:
+PERSONAL:- Angriffstrupp (2 Mann, PA): Brand 2. OG + Vermisstensuche; - Sicherheitstrupp (2 Mann, PA): Erkundung/Rettung 3. OG via Treppenhaus; - Maschinist (1 Mann): Wasserversorgung; - Melder (1 Mann): Kommunikation + Atemschutzüberwachung; - Gruppenführer (1 Mann): Einsatzleitung; - Reserve (2 Mann): DLK-Unterstützung, Evakuierung; MATERIAL:- 4x Pressluftatmer (beide Trupps); - Wärmebildkamera (Angriffstrupp); - Strahlrohre, C-Schläuche; - Rettungsgeräte bereithalten (Tragetücher, Leinen); - Hydrant 50m - B-Schlauch; FAHRZEUGE:- HLF: Wasserversorgung aufbauen (800L nur für erste Minute!); - DLK (auf Anfahrt): Rettung 3. OG als Hauptweg; ATEMSCHUTZÜBERWACHUNG: Sofort beim PA-Einsatz durch Melder! Einsatzbeginn, Flaschendruck, ; Einsatzort dokumentieren. Gesetzlich vorgeschrieben!
+
+KOMMUNIKATION:
+AN LEITSTELLE (sofort): "Feuer 3 von Brandmeister Müller, kritische Lage bestätigt: - Wohnungsbrand 2. OG Vollbrand, Flammen und starke Rauchentwicklung - 3 Personen 3. OG am Fenster akut bedroht, Rauchvergiftungsgefahr - 1 Person vermisst in Brandwohnung 2. OG - Altbau Baujahr 1920, Holzbalkendecken,  Einsturzgefahr! - Dachboden durchgängig, Ausbreitungsgefahr hoch - Treppenhaus verraucht, keine Selbstrettung möglich - DLK im Anmarsch NACHFORDERUNG: - Rettungsdienst mit 3-4 RTW und Notarzt/LNA - Zweiter Löschzug als Reserve - Polizei zur Absperrung LAGEMELDUNG folgt nach Ersterkundung." IM TEAM: Klare Aufträge an jeden Trupp, Funkdisziplin, regelmäßige Rückmeldungen. AN BEWOHNER: Über Megaphon zu 3. OG: "Fenster zu! Rettung kommt! Legen Sie nasse  Handtücher vor die Tür!"
+
+NÄCHSTE_SCHRITTE:
+0-2 Min: Angriffstrupp dringt vor, Wasserversorgung wird gebaut; 2-4 Min: Wasser fließt, Brandbekämpfung beginnt; 2-5 Min: Sicherheitstrupp prüft Rettung über Treppenhaus; 4-6 Min: DLK trifft ein, wird eingewiesen; 6-8 Min: Rettung 3. OG beginnt (DLK oder Treppenhaus, je nach Lage); Parallel: Angriffstrupp sucht vermissten Mann während Brandbekämpfung; WENN DLK verzögert: Rettung notfalls über Treppenhaus mit PA-Schutz!; NACH RETTUNG:- Brand vollständig löschen; - Dachboden kontrollieren (Glutnester!); - Nachbarwohnungen kontrollieren; - Statik prüfen lassen (Holzbalkendecken!); KONTINUIERLICH:- Atemschutzüberwachung; - Lagemeldungen an Leitstelle; - Einsatzkräfte rotieren (PA-Belastung)
+
+
+FOLGEN:
+ZEITLINIE (15 Minuten nach Eintreffen):
+
+MIN 0-2:
+✓ Angriffstrupp (2 Mann, PA) dringt in 2. OG ein und beginnt Brandbekämpfung.
+✓ Sicherheitstrupp (2 Mann, PA) erkundet Treppenhaus im 3. OG.
+✓ Maschinist begibt sich zum Hydrant (50m entfernt) und beginnt Wasserversorgung aufzubauen.
+✓ Melder kontaktiert Leitstelle: "Feuer 3 von Brandmeister Müller, kritische Lage bestätigt..."
+✓ Atemschutzüberwachung wird sofort aufgebaut.
+
+MIN 2-4:
+✓ Wasserversorgung steht (Hydrant in Betrieb).
+✓ Angriffstrupp beginnt intensiv mit der Brandbekämpfung.
+✗ Sicherheitstrupp findet das Treppenhaus stark verraucht und nicht für Rettung geeignet.
+✓ Melder fordert Verstärkung: "Rettungsdienst mit 3-4 RTW, Notarzt/LNA."
+
+MIN 4-6:
+✓ Drehleiter (DLK) trifft ein und wird eingewiesen. Rettungsoperation für Personen im 3. OG beginnt.
+✗ Angriffstrupp findet keine Spur des Vermissten in der Brandwohnung; Suche weiterhin aktiv.
+
+MIN 6-8:
+✓ Erste Person am Fenster (3. OG) wird mit Drehleiter gerettet und an den Notarzt übergeben.
+✓ Angriffstrupp konzentriert sich weiter auf die Brandbekämpfung im 2. OG.
+✗ Vermisster Mann noch immer nicht gefunden; Suche ausgedehnter in der Wohnung durchgeführt.
+
+MIN 8-10:
+✓ Zwei weitere Personen am Fenster (3. OG) werden rettungsdienstlich gerettet und versorgt.
+✓ Brandbekämpfung im 2. OG wird intensiviert, Flammen kontrolliert; Glutnester beseitigt.
+✗ Vermisste Person in der Brandwohnung nicht gefunden.
+
+MIN 10-15:
+✓ Brand im 2. OG unter Kontrolle, aber immer noch aktiv bekämpft.
+✗ Vermisster Mann noch immer verschollen - Status unbekannt; Suche fortgesetzt.
+✓ Dachboden kontrolliert und als unberührt festgestellt, aber Einsturzgefahr durch Holzbalkendecken besteht.
+
+AKTUELLE LAGE (MIN 15):
+🔥 Hauptgefahr: Brand im 2. OG unter Kontrolle, Glutnester beseitigt; Vermisste Person unbekannt.
+👤 Personen: 3 Personen am Fenster (3. OG) gerettet und versorgt; Vermisster Mann noch verschollen.
+🚨 Einsatzkräfte: Angriffstrupp im 2. OG (PA-Luft 5 Min verbleibend), Sicherheitstrupp bei Drehleiter, DLK vor Ort
+⚠️ Weitere Gefahren: Einsturzgefahr durch Holzbalkendecken; Glutnester im 2. OG zu beseitigen.
+
+KRITISCHE INFORMATIONEN:
+• PA-Luft Angriffstrupp: 5 Minuten verbleibend
+• DLK vor Ort und eingesetzt (3 Personen gerettet)
+• Wasserversorgung: Hydrant aktiv, Wasserfluss stabil
+• Wärmebildkamera: Glutnester im 2. OG erkennbar
+
+NEUE ERKENNTNISSE:
+• Vermisster Mann möglicherweise nicht in der Brandwohnung; Suche ausgedehnter durchgeführt.
+• Dachboden kontrolliert, unberührt festgestellt, aber Einsturzgefahr besteht.
+
+================================================================================
+ZUG #2 - 2025-10-22T11:31:53.945615
+================================================================================
+
+ENTSCHEIDUNG:
+
+LAGEEINSCHÄTZUNG:
+Lage hat sich stabilisiert: Brand 2. OG unter Kontrolle, 3 Personen erfolgreich gerettet! KRITISCH: Angriffstrupp nur noch 5 Min PA-Luft - MUSS SOFORT abgelöst werden! Glutnester im 2. OG müssen beseitigt werden. Vermisster immer noch nicht gefunden - möglicherweise gar nicht in der Brandwohnung (Zeugenbefragung notwendig). Einsturzgefahr durch Holzbalkendecken muss geprüft werden bevor weitere Kräfte ins Gebäude.
+
+PRIORITÄTEN:
+1. SOFORT: Angriffstrupp ablösen (PA-Luft kritisch - keine Minute verlieren!) 2. Brand vollständig löschen (Glutnester beseitigen) 3. Statikprüfung anfordern (Holzbalken - kein Einsatz ohne Freigabe!) 4. Vermisstensuche ausweiten (Befragung der geretteten Personen, andere Wohnungen prüfen) 5. Nachbarwohnungen kontrollieren (Rauchschäden, weitere Personen)
+
+SOFORTMASSNAHMEN:
+ANGRIFFSTRUPP (2 OG): SOFORT RAUS! PA-Luft unter 5 Min = Rückzug!  Übergabe Position an Ablösung, dann PA-Wechsel, Pause, medizinische Kontrolle. RESERVE (2 Mann, frische PA): Übernimmt SOFORT Position 2. OG, setzt Brandbekämpfung fort, beseitigt Glutnester mit Wärmebildkamera. SICHERHEITSTRUPP: Kontrolliert Nachbarwohnungen im 2. + 3. OG (Rauchschäden, weitere Personen?), befragt gerettete Personen: "Wo könnte der Vermisste sein?" MELDER: Lagemeldung an Leitstelle: "Brand unter Kontrolle, 3 Personen gerettet und versorgt, 1 vermisst - Aufenthalt unklar. Benötige Statiker wegen Einsturzgefahr Holzbalkendecken. Zweiter Löschzug für Nachlöscharbeiten."GRUPPENFÜHRER: Koordination PA-Wechsel, niemand überschreitet Grenzwerte! Statikprüfung organisieren, erweiterte Vermisstensuche einleiten. ZWEITER LÖSCHZUG (falls eingetroffen): Nachlöscharbeiten, Kontrolle Dachboden, Brandwache.
+
+RESSOURCENEINSATZ:
+PERSONAL: - Alter Angriffstrupp (2 Mann): RAUS, PA-Wechsel, Pause, medizinische Kontrolle - Neue Brandbekämpfung (2 Mann Reserve, frische PA): 2. OG Glutnester beseitigen - Sicherheitstrupp (2 Mann): Nachbarwohnungen kontrollieren,  Zeugenbefragung - Maschinist (1 Mann): Wasserversorgung aufrechterhalten - Melder (1 Mann): Kommunikation, Atemschutzüberwachung (PA-Wechsel dokumentieren!) - Gruppenführer (1 Mann): Einsatzleitung, Statikprüfung organisieren - Zweiter Löschzug (falls da): Nachlöscharbeiten, Dachbodenkontrolle MATERIAL: - Frische PA-Flaschen für Ablösung - Wärmebildkamera weiter im Einsatz (Glutnester finden) - Rettungsgeräte weiter bereithalten (falls Vermisster gefunden wird) FAHRZEUGE: - HLF: Wasserversorgung läuft weiter - DLK: Bleibt in Stellung (eventuelle weitere Rettungen) - Zweiter Löschzug: Nachlöscharbeiten ATEMSCHUTZÜBERWACHUNG: PA-Wechsel dokumentieren! Alte Trupps raus, neue Trupps rein mit vollen Flaschen!
+
+KOMMUNIKATION:
+AN LEITSTELLE (sofort): "Feuer 3 von Brandmeister Müller, Lagemeldung MIN 15: - Brand 2. OG unter Kontrolle, Nachlöscharbeiten laufen - 3 Personen aus 3. OG erfolgreich gerettet, werden versorgt - 1 Person weiterhin vermisst - Aufenthalt unklar, Suche läuft - Angriffstrupp abgelöst (PA-Luft kritisch) - Einsturzgefahr Holzbalkendecken: Benötige STATIKER zur Prüfung! - Zweiter Löschzug für Nachlöscharbeiten einsetzen - Keine weiteren Nachforderungen aktuell Nächste Lagemeldung in 15 Minuten." AN GERETTETE PERSONEN: "Wir suchen noch eine vermisste Person. Wissen Sie, wo diese Person sein könnte? War sie zum Zeitpunkt des Brands in der Wohnung? Gibt es andere Orte wo sie sein könnte?" AN TEAM: "Gute Arbeit! 3 Personen gerettet! Jetzt konzentriert weiterarbeiten: - PA-Grenzwerte einhalten - niemand in Gefahr bringen! - Glutnester restlos beseitigen - Vorsicht Einsturzgefahr - auf Statiker warten! - Vermisste Person suchen - andere Wohnungen, Keller, Treppenhaus"
+
+NÄCHSTE_SCHRITTE:
+15-17 Min: PA-Wechsel durchführen, Trupp-Ablösung abgeschlossen, alte Trupps medizinisch checken. 17-20 Min: Nachlöscharbeiten 2. OG, Glutnester mit Wärmebildkamera beseitigen, Brandbekämpfung abschließen. 20-25 Min: Nachbarwohnungen im 2. + 3. OG kontrollieren (Rauchschäden, weitere Personen, Hinweise auf Vermissten). 25-30 Min: Statiker trifft ein, prüft Holzbalkendecken - Freigabe für weitere Arbeiten oder Sperrung. Dachboden kontrollieren (Glutnester, Brandspuren). 30-35 Min: Erweiterte Vermisstensuche je nach Zeugenbefragung - andere Wohnungen, Keller, Nachbargebäude? KONTINUIERLICH: - Atemschutzüberwachung (alle Trupps) - Wasserversorgung aufrechterhalten - Lagemeldungen an Leitstelle - DLK in Bereitschaft - Eigenschutz beachten!
+
+
+FOLGEN:
+ZEITLINIE (15-20 Minuten nach Eintreffen):
+
+MIN 15-17:
+✓ Angriffstrupp im 2. OG wird abgelöst, alte Truppe wechselt PA und macht Pause.
+✓ Neue Brandbekämpfungstruppe übernimmt Position in 2. OG mit frischer PA.
+✓ Sicherheitstrupp beginnt Nachbarwohnungen im 2. OG zu kontrollieren und befragt gerettete Personen.
+✗ Statiker wurden nicht angefordert.
+
+MIN 17-20:
+✓ Glutnester im 2. OG werden beseitigt, Brand bekämpft weiter mit Wärmebildkamera.
+✓ Wasserversorgung läuft stabil.
+✗ Vermisstensuche ausgeweitet wurde nicht durchgeführt (keine Befragungen von Zeugen).
+
+MIN 20-25:
+✓ Nachbarwohnungen im 3. OG werden kontrolliert, keine weiteren Personen gefunden.
+✗ Statikprüfung bleibt offene Aufgabe.
+
+AKTUELLE LAGE (MIN 20):
+🔥 Brand 2. OG: Unter Kontrolle, Glutnester beseitigt
+👤 Vermisster Mann: Unbekannter Standort, Suche läuft aber nicht intensiv
+👤 Gerettete Personen: Versorgt und befragt, keine neuen Informationen zu Vermissten
+🚨 Einsatzkräfte: Angriffstrupp im 2. OG (PA-Luft 15 Min), Sicherheitstrupp bei Nachbarwohnungen
+⚠️ Einsturzgefahr Holzbalkendecken nicht geprüft
+
+KRITISCHE INFORMATIONEN:
+• PA-Luft Angriffstrupp: 15 Minuten verbleibend
+• Wasserversorgung: Aktiv, Hydrant in Betrieb
+• Statikprüfung: Noch nicht angefordert
+• Vermisstensuche: Läuft aber unzureichend (keine Zeugenbefragungen)
+
+NEUE ERKENNTNISSE:
+• Nachbarwohnungen im 3. OG ohne weitere Personen oder Hinweise auf Vermissten.
+• Glutnester beseitigt, Brand vollständig gelöscht.
+• Einsturzgefahr Holzbalkendecken unklar (Statikprüfung notwendig).
+
+
+================================================================================
+FINALE BEWERTUNG
+================================================================================
+
+Es scheint, dass die Situation stabilisiert hat, aber es gibt noch wichtige Aufgaben und Entscheidungen zu erledigen. Hier sind einige kritische Punkte und empfohlene Aktionen:
+
+### Kritische Informationen und Neue Erkenntnisse
+
+1. **PA-Luft Angriffstrupp**: 15 Minuten verbleibend, was bedeutet, dass eine weitere PA-Wechsel notwendig ist.
+2. **Wasserversorgung**: Stabil und Hydrant in Betrieb.
+3. **Statikprüfung**: Noch nicht angefordert, aber dringend erforderlich wegen der Einsturzgefahr Holzbalkendecken.
+4. **Vermisstensuche**: Läuft unzureichend (keine Zeugenbefragungen).
+
+### Empfohlene Aktionen
+
+1. **PA-Wechsel durchführen**:
+   - Stellen Sie sicher, dass der Angriffstrupp im 2. OG seine PA-Flaschen wechselt und eine Pause macht.
+   - Dokumentieren Sie den PA-Wechsel und führen Sie eine medizinische Kontrolle durch.
+
+2. **Statikprüfung anfordern**:
+   - Organisieren Sie die Anforderung von Statikern, um die Einsturzgefahr der Holzbalkendecken zu prüfen.
+   - Warten Sie nicht länger, da dies eine dringende Sicherheitsfrage ist.
+
+3. **Erweiterte Vermisstensuche**:
+   - Beginnen Sie mit einer intensiven Suche im gesamten Gebäude (anderen Wohnungen, Keller, Treppenhäuser).
+   - Befragen Sie alle Zeugen und die geretteten Personen erneut, um mögliche Hinweise zu erhalten.
+   - Erweitern Sie die Suche auf Nachbargebäude, falls notwendig.
+
+4. **Nachbarwohnungen kontrollieren**:
+   - Stellen Sie sicher, dass alle Nachbarwohnungen im 2. OG und 3. OG kontrolliert wurden und keine weiteren Personen oder Hinweise auf den Vermissten gefunden wurden.
+   - Dokumentieren Sie alle Befragungen und Kontrolle.
+
+5. **Nachlöscharbeiten abschließen**:
+   - Lassen Sie den zweiten Löschzug einsetzen, um die Nachlöscharbeiten abzuschließen und sicherzustellen, dass keine Glutnester übrig bleiben.
+   - Führen Sie eine detaillierte Kontrolle des Dachbodens durch, um sicherzustellen, dass kein Brandmaterial vorhanden ist.
+
+6. **Einsatzleitung und Kommunikation**:
+   - Bereiten Sie eine weitere Lagemeldung an die Leitstelle vor.
+   - Informieren Sie das Team über die nächsten Schritte und stellen Sie sicher, dass alle Anweisungen einhalten werden.
+
+### Dokumentation
+
+- Stellen Sie sicher, dass alle Aktionen dokumentiert sind, einschließlich der PA-Wechsel, Statikprüfungsergebnisse und Befragungsergebnisse.
+- Führen Sie regelmäßige Lagemeldungen durch und teilen Sie die aktuelle Situation mit den relevanten Behörden.
+
+Durch diese Maßnahmen können Sie sicherstellen, dass alle notwendigen Aktionen ausgeführt werden und das Risiko für weitere Unfälle minimiert wird.

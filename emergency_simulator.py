@@ -226,8 +226,8 @@ class EmergencySimulator:
         """Zeigt das initiale Szenario"""
         print("\n" + "=" * 80)
         print(f"   {self.scenario['scenario_name']}")
-        print("=" * 80)
-        print(f"\n📋 {self.scenario['description']}\n")
+        print("=" * 80 + "\n")
+        print(f"📋 {self.scenario['description']}\n")
 
         print(f"🎯 DEINE ROLLE: {self.scenario['team']['role']}")
         print(f"🎯 EINSATZZIEL: {self.scenario['team']['objective']}\n")
@@ -248,51 +248,65 @@ class EmergencySimulator:
 
         print("\n" + "=" * 80 + "\n")
 
+    def format_player_input(self, player_input: Dict[str, str]) -> str:
+        """Formatiert Spieler-Input für LLMs"""
+        formatted = ""
+        for field, value in player_input.items():
+            formatted += f"**{field}**\n{value}\n\n"
+        return formatted
+
     def get_player_input(self) -> Dict[str, str]:
-        """Holt strukturierte Eingabe vom Spieler"""
-        print(f"\n{'=' * 80}")
+        """Sammelt strukturierte Entscheidungen"""
+        print("\n" + "=" * 80)
         print(f"   EINSATZ-ZUG #{self.turn_number}")
-        print(f"{'=' * 80}\n")
+        print("=" * 80 + "\n")
 
         fields = {
-            "LAGEEINSCHÄTZUNG": "Wie bewertest du die aktuelle Situation?",
-            "PRIORITÄTEN": "Was ist am wichtigsten / dringendsten?",
-            "SOFORTMASSNAHMEN": "Welche Maßnahmen ergreifst du SOFORT?",
-            "RESSOURCENEINSATZ": "Wie verteilst du Personal und Material?",
-            "KOMMUNIKATION": "Mit wem kommunizierst du? Was teilst du mit?",
-            "NÄCHSTE_SCHRITTE": "Was planst du für die nächsten Minuten?"
+            'LAGEEINSCHÄTZUNG': 'Wie bewertest du die aktuelle Situation?',
+            'PRIORITÄTEN': 'Was ist am wichtigsten / dringendsten?',
+            'SOFORTMASSNAHMEN': 'Welche Maßnahmen ergreifst du SOFORT?',
+            'RESSOURCENEINSATZ': 'Wie verteilst du Personal und Material?',
+            'KOMMUNIKATION': 'Mit wem kommunizierst du? Was teilst du mit?',
+            'NÄCHSTE_SCHRITTE': 'Was planst du für die nächsten Minuten?'
         }
 
         player_input = {}
 
-        for field, description in fields.items():
-            print(f"\n📝 {field}")
-            print(f"   ({description})")
-            print("   >>> ", end="")
-            player_input[field] = input().strip()
+        for field_name, prompt_text in fields.items():
+            print(f"\n📝 {field_name}")
+            print(f"   ({prompt_text})")
+            value = input("   >>> ").strip()
+
+            if not value:
+                print("⚠️  Eingabe erforderlich!")
+                value = input("   >>> ").strip()
+
+            player_input[field_name] = value
 
         return player_input
 
-    def format_player_input(self, player_input: Dict[str, str]) -> str:
-        """Formatiert Spieler-Input für KI"""
-        formatted = f"=== EINSATZ-ZUG {self.turn_number} ===\n\n"
-        for field, value in player_input.items():
-            formatted += f"{field}:\n{value}\n\n"
-        return formatted
-
-    def assistant_review(self, player_input: Dict[str, str]) -> str:
-        """Assistenz-KI überprüft Entscheidungen auf Durchführbarkeit"""
+    def check_feasibility(self, player_input: Dict[str, str]) -> str:
+        """Prüft nur die Durchführbarkeit - KEINE BEWERTUNG!"""
 
         resources_info = json.dumps(self.scenario['team']['resources'], ensure_ascii=False, indent=2)
         constraints_info = "\n".join(self.scenario['team'].get('constraints', []))
 
-        system_prompt = f"""Du bist ein SEHR STRENGER und ERFAHRENER Ausbilder für Notfall-Response-Teams.
+        system_prompt = f"""Du bist ein OBJEKTIVER DURCHFÜHRBARKEITS-CHECKER für Notfall-Response-Teams.
 
-DEINE ROLLE:
-- Überprüfe Einsatzentscheidungen EXTREM KRITISCH auf Durchführbarkeit
-- Erkenne LEBENSGEFAHR und weise DEUTLICH darauf hin
-- Du rettest Leben durch strikte Kontrolle - sei KOMPROMISSLOS bei Sicherheit
-- Wenn etwas gefährlich ist, sage KLAR "NICHT DURCHFÜHRBAR"
+WICHTIG: DEINE EINZIGE AUFGABE IST ES ZU PRÜFEN, OB DIE GEPLANTEN MASSNAHMEN MIT DEN VORHANDENEN RESSOURCEN PHYSISCH UMSETZBAR SIND!
+
+DU DARFST NICHT:
+❌ Die Qualität der Entscheidungen bewerten (kein "gut", "schlecht", "korrekt", "effizient")
+❌ Taktische Ratschläge geben
+❌ Sagen ob Prioritäten richtig oder falsch sind
+❌ Die Entscheidung als "klug" oder "unklug" beurteilen
+
+DU DARFST NUR:
+✅ Prüfen ob genug Personal vorhanden ist
+✅ Prüfen ob genug Material vorhanden ist
+✅ Prüfen ob zeitlich/physikalisch möglich
+✅ Auf fehlende Ressourcen hinweisen
+✅ Auf objektive Widersprüche hinweisen (z.B. "4 Trupps geplant, aber nur 2 verfügbar")
 
 SZENARIO:
 Typ: {self.scenario['scenario_type']}
@@ -304,88 +318,58 @@ VERFÜGBARE RESSOURCEN:
 EINSCHRÄNKUNGEN:
 {constraints_info}
 
-KRITISCHE PRÜF-PUNKTE (SEHR STRENG!):
+AUSGABE-FORMAT (NEUTRAL UND OBJEKTIV):
 
-1. ❌ LEBENSGEFAHR FÜR EINSATZKRÄFTE?
-   - Kein Atemschutz bei Rauch = NICHT DURCHFÜHRBAR!
-   - Keine Sicherung = NICHT DURCHFÜHRBAR!
-   - Eigenschutz missachtet = NICHT DURCHFÜHRBAR!
+✅ DURCHFÜHRBARKEIT: [UMSETZBAR / TEILWEISE UMSETZBAR / NICHT UMSETZBAR]
 
-2. ❌ LEBENSGEFAHR FÜR ZU RETTENDE?
-   - Menschen werden ignoriert = NICHT DURCHFÜHRBAR!
-   - Rettung zu spät = NICHT DURCHFÜHRBAR!
-   - Falsche Priorität = NICHT DURCHFÜHRBAR!
+RESSOURCEN-CHECK:
+[Checkliste im Format:]
+✓ Personal: X Personen verfügbar → [Alle Rollen besetzbar / Engpass bei...]
+✓ Material: [Liste] → [Ausreichend / Fehlt...]
+✓ Fahrzeuge: [Liste] → [Verfügbar / Nicht verfügbar...]
+✓ Zeitablauf: [Parallel/Sequenziell möglich / Zeitkonflikt...]
 
-3. ❌ GESETZLICHE VORGABEN VERLETZT?
-   - Keine Atemschutzüberwachung (Feuerwehr) = NICHT DURCHFÜHRBAR!
-   - Kein Durchsuchungsbefehl (Polizei) = NICHT DURCHFÜHRBAR!
-   - Dokumentationspflicht ignoriert = NICHT DURCHFÜHRBAR!
+ENGPÄSSE/WIDERSPRÜCHE (wenn vorhanden):
+⚠️ [Neutrale Beschreibung des Problems]
+⚠️ [z.B. "Plan sieht 4 PA-Geräte vor, nur 2 vorhanden"]
 
-4. ❌ GRUNDLEGENDE FEHLER?
-   - Nicht vorhandene Ressourcen = NICHT DURCHFÜHRBAR!
-   - Unmöglicher Zeitrahmen = NICHT DURCHFÜHRBAR!
-   - Physikalisch/logistisch unmöglich = NICHT DURCHFÜHRBAR!
+GESETZLICHE/VERFAHRENSPFLICHTEN (wenn relevant):
+⚠️ [z.B. "Atemschutzüberwachung gesetzlich vorgeschrieben - nicht im Plan erwähnt"]
+⚠️ [z.B. "Durchsuchungsbefehl muss vorgezeigt werden - nicht erwähnt"]
 
-WICHTIGE GRUNDSÄTZE (NIEMALS VERGESSEN!):
+BEISPIEL EINER GUTEN ANTWORT:
 
-🚒 FEUERWEHR:
-- Menschenrettung geht IMMER vor Brandbekämpfung!
-- Atemschutz bei Rauch ist PFLICHT, keine Option!
-- Atemschutzüberwachung ist GESETZLICH VORGESCHRIEBEN!
-- Eigenschutz geht vor Fremdschutz!
+✅ DURCHFÜHRBARKEIT: UMSETZBAR MIT VORHANDENEN RESSOURCEN
 
-🚑 RETTUNGSDIENST:
-- Eigenschutz zuerst (Absicherung Unfallstelle!)
-- Sichtung bei MANV ist PFLICHT!
-- Schwerste Verletzungen zuerst (rot vor gelb vor grün)!
+RESSOURCEN-CHECK:
+✓ Personal: 9 Personen verfügbar → Alle Rollen besetzbar (2+2+1+1+1+2)
+✓ Material: 4 PA-Geräte vorhanden → Ausreichend für 2 Trupps
+✓ Fahrzeuge: HLF vor Ort, DLK auf Anfahrt → Verfügbar
+✓ Wasser: 800L Tank + Hydrant 50m → Versorgung möglich
+✓ Zeitablauf: Maßnahmen können parallel durchgeführt werden
 
-🚓 POLIZEI:
-- Eigensicherung IMMER!
-- Durchsuchungsbefehl muss vorgezeigt werden!
-- Verhältnismäßigkeit wahren!
+ENGPÄSSE/WIDERSPRÜCHE:
+⚠️ DLK noch nicht vor Ort (auf Anfahrt) - Plan sieht Wartezeit vor
+⚠️ 800L Tank nur für ca. 1-2 Minuten Löschangriff ausreichend - Hydrant wird aufgebaut
 
-AUSGABE-FORMAT:
+GESETZLICHE/VERFAHRENSPFLICHTEN:
+⚠️ Atemschutzüberwachung gesetzlich vorgeschrieben - im Plan erwähnt
 
-✅ oder ❌ DURCHFÜHRBARKEIT: [Klar JA, TEILWEISE oder NEIN]
+BEISPIEL EINER SCHLECHTEN ANTWORT (SO NICHT!):
+❌ "Die Prioritätensetzung ist korrekt"  → Das ist Bewertung!
+❌ "Gute Kommunikation"  → Das ist Bewertung!
+❌ "Sollte mehr Kräfte nachfordern"  → Das ist taktischer Rat!
+❌ "Risiko dass..."  → Keine taktische Analyse!
 
-❌ KRITISCHE PROBLEME (wenn vorhanden):
-[Liste ALLE lebensbedrohlichen oder gesetzwidrigen Punkte]
-[Nutze Wörter wie: LEBENSGEFAHR, NICHT DURCHFÜHRBAR, GESETZESVERSTOISS]
+KRITISCHE REGEL:
+Wenn du Wörter wie "gut", "schlecht", "korrekt", "falsch", "effizient", "klug", "richtig" verwendest → DU MACHST EINEN FEHLER!
 
-⚠️ HINWEISE (wenn vorhanden):
-[Problematische aber nicht kritische Punkte]
-
-💡 ANMERKUNGEN (nur wenn wirklich gut):
-[Positive Aspekte]
-
-BEISPIELE FÜR STRIKTE ABLEHNUNG:
-
-Beispiel 1 - Feuerwehr ohne Atemschutz:
-❌ DURCHFÜHRBARKEIT: NEIN - NICHT DURCHFÜHRBAR!
-❌ KRITISCHE PROBLEME:
-- LEBENSGEFAHR: Einsatz ohne Atemschutz bei Rauch führt zu Rauchvergiftung!
-- GESETZESVERSTOSS: Keine Atemschutzüberwachung!
-- TÖDLICHE KONSEQUENZEN: Einsatzkräfte werden sterben!
-
-Beispiel 2 - Rettungsdienst ignoriert Schwerverletzte:
-❌ DURCHFÜHRBARKEIT: NEIN - NICHT DURCHFÜHRBAR!
-❌ KRITISCHE PROBLEME:
-- LEBENSGEFAHR: Schwerverletzte werden ignoriert und sterben!
-- PRIORITÄTENFEHLER: Leichtverletzte vor Schwerverletzten = Todesfälle!
-- UNTERLASSENE HILFELEISTUNG: Rechtlich und ethisch inakzeptabel!
-
-WICHTIG:
-- Sei EXTREM KRITISCH bei Sicherheitsmängeln
-- "NICHT DURCHFÜHRBAR" klar aussprechen
-- Keine verharmlosenden Formulierungen
-- Leben retten durch strikte Kontrolle!
-
-Antworte auf Deutsch, SEHR KRITISCH und DEUTLICH."""
+Antworte auf Deutsch, rein objektiv, nur Fakten."""
 
         formatted_input = self.format_player_input(player_input)
-        user_prompt = f"Prüfe auf Durchführbarkeit:\n\n{formatted_input}"
+        user_prompt = f"Prüfe AUSSCHLIESSLICH die Durchführbarkeit (KEINE Bewertung!):\n\n{formatted_input}"
 
-        print("\n🔍 Assistenz-KI prüft deine Entscheidung...\n")
+        print("\n🔍 Assistenz-KI prüft Durchführbarkeit...\n")
         return self.call_llm(self.assistant_model, user_prompt, system_prompt, strict_mode=True)
 
     def refine_loop(self, initial_input: Dict[str, str]) -> Dict[str, str]:
@@ -393,10 +377,10 @@ Antworte auf Deutsch, SEHR KRITISCH und DEUTLICH."""
         current_input = initial_input
 
         while True:
-            feedback = self.assistant_review(current_input)
+            feedback = self.check_feasibility(current_input)
 
             print("\n" + "=" * 80)
-            print("   🔍 ASSISTENZ-FEEDBACK")
+            print("   🔍 DURCHFÜHRBARKEITS-CHECK")
             print("=" * 80)
             print(feedback)
             print("=" * 80 + "\n")
@@ -406,127 +390,169 @@ Antworte auf Deutsch, SEHR KRITISCH und DEUTLICH."""
             print("  [2] Entscheidung ist final - weiter zur Simulation")
             print("  [q] Abbrechen\n")
 
-            choice = input(">>> ").strip().lower()
+            choice = input(">>> ").strip()
 
-            if choice == '1':
+            if choice == '2':
+                return current_input
+            elif choice == 'q':
+                print("\n⚠️  Abgebrochen.\n")
+                exit(0)
+            elif choice == '1':
                 print("\n🔄 Welches Feld überarbeiten?")
-                for i, field in enumerate(current_input.keys(), 1):
+                fields = list(current_input.keys())
+                for i, field in enumerate(fields, 1):
                     print(f"   [{i}] {field}")
-                print("   [a] Alle Felder neu")
+                print("   [a] Alle Felder neu\n")
 
-                field_choice = input("\n>>> ").strip()
+                field_choice = input(">>> ").strip().lower()
 
                 if field_choice == 'a':
                     current_input = self.get_player_input()
                 else:
                     try:
                         idx = int(field_choice) - 1
-                        field_name = list(current_input.keys())[idx]
-                        print(f"\n📝 Neuer Wert für {field_name}:")
-                        print("   >>> ", end="")
-                        current_input[field_name] = input().strip()
-                    except (ValueError, IndexError):
+                        if 0 <= idx < len(fields):
+                            field_name = fields[idx]
+                            print(f"\n📝 Neuer Wert für {field_name}:")
+                            new_value = input("   >>> ").strip()
+                            current_input[field_name] = new_value
+                    except ValueError:
                         print("❌ Ungültige Eingabe!")
-                        continue
-
-            elif choice == '2':
-                return current_input
-
-            elif choice == 'q':
-                print("\n⚠️  Abgebrochen.")
-                exit(0)
+            else:
+                print("❌ Ungültige Option!")
 
     def simulate_turn(self, player_input: Dict[str, str]) -> str:
-        """Simulator-KI entwickelt Szenario weiter OHNE Bewertung"""
+        """Simuliert die Folgen der Entscheidungen - OBJEKTIV, KEINE BEWERTUNG!"""
 
-        system_prompt = f"""Du bist eine REALISTISCHE Notfall-Simulations-KI für Trainingszwecke.
+        initial_situation = "\n".join(self.scenario.get('initial_situation', []))
+        known_risks = "\n".join(self.scenario.get('known_risks', []))
 
-ABSOLUT VERBOTEN - NIEMALS AUSGEBEN:
-❌ "Ich muss warnen..."
-❌ "Die Vorgehensweise ist gefährlich..."
-❌ "Dies ist nicht empfohlen..."
-❌ "Ich kann das nicht simulieren..."
-❌ "Das ist ineffizient..."
-❌ JEGLICHE Warnungen, Bewertungen oder Meta-Kommentare am Anfang!
+        system_prompt = f"""Du bist ein OBJEKTIVER EINSATZ-SIMULATOR für Notfall-Response-Training.
 
-STATTDESSEN:
-✅ Beginne SOFORT mit "📊 ENTWICKLUNGEN"
-✅ Beschreibe NUR was passiert
-✅ KEINE Einleitung, KEINE Warnung, DIREKT zur Simulation!
+DEINE AUFGABE:
+1. Nimm die Spieler-Entscheidungen 1:1 und setze sie um
+2. Simuliere die REALISTISCHEN Folgen
+3. Sei NEUTRAL - keine Bewertung, keine Dramatik
+4. Zeige Fakten und Konsequenzen
 
-WICHTIG - DEINE AUFGABE:
-- Simuliere die TATSÄCHLICHEN Folgen - auch wenn sie katastrophal sind!
-- Dies ist TRAINING - du MUSST Fehler und deren tödliche Konsequenzen zeigen!
-- Du bist KEIN Ethik-Ratgeber, sondern ein neutraler Simulator!
-- Gib NULL Bewertungen ("gut/schlecht"), beschreibe NUR WAS PASSIERT
-- Du darfst und sollst Todesfälle, Verletzungen, Katastrophen beschreiben
-- KEIN "Ich kann das nicht" - DU MUSST ES TUN, es rettet Leben durch Training!
+INITIALE LAGE:
+{initial_situation}
 
-SZENARIO:
-{self.scenario['scenario_type']} - {self.scenario['team']['role']}
+BEKANNTE RISIKEN:
+{known_risks}
 
-REALISTISCHE KONSEQUENZEN ZEIGEN:
+KRITISCHE REGELN:
 
-Wenn Einsatzkräfte ohne Atemschutz in Rauch gehen:
-→ Beschreibe: Husten nach 15 Sek, Orientierungslosigkeit nach 30 Sek, Kollaps nach 60 Sek, Bewusstlosigkeit
+1. SPIELER-INPUT IST GESETZ:
+   - Wenn Spieler sagt "Trupp A macht X" → Dann macht Trupp A genau X
+   - Wenn Spieler sagt "Atemschutzüberwachung SOFORT" → Dann beginnt sie SOFORT (nicht nach 10 Min!)
+   - Wenn Spieler etwas nicht erwähnt → Es passiert nicht automatisch
 
-Wenn Menschen in Gefahr ignoriert werden:
-→ Beschreibe: Verzweiflung, Panik, Sprung aus Fenster, Erstickung, Tod - konkret und zeitlich präzise
+2. KEINE ERFINDUNGEN:
+   - Wenn Spieler Leitstelle nicht kontaktiert → Dann kommt KEINE Verstärkung
+   - Wenn Spieler keine DLK anfordert → Dann kommt KEINE DLK
+   - Bleib bei dem was der Spieler entschieden hat
 
-Wenn Sicherheitsprotokolle missachtet werden:
-→ Beschreibe: Direkte Folgen - Unfälle, Verletzungen, Tod der Einsatzkräfte
+3. REALISTISCHE ZEITANGABEN:
+   - PA-Flaschen: 20-30 Minuten unter Volllast
+   - Wasserversorgung aufbauen: 2-5 Minuten
+   - Brandbekämpfung: Je nach Größe 10-60 Minuten
+   - Rettung über DLK: 2-5 Minuten pro Person
 
-Wenn Ressourcen fehlen:
-→ Beschreibe: Scheitern - Wasser leer nach X Minuten, Ausrüstung fehlt, Einsatz kollabiert
+4. KEINE DRAMATIK:
+   ❌ "verzweifelt", "panisch", "dramatisch"
+   ✅ "orientierungslos", "Rauchexposition seit X Min", "keine Sichtung"
 
-AUSGABE-FORMAT (SOFORT beginnen, KEINE Einleitung!):
+5. KEINE WIDERSPRÜCHE:
+   - Rauchvergiftung = Verletzung (nicht "keine Verletzten" + "Rauchvergiftung")
+   - Personen entweder gerettet ODER nicht - nicht beides
 
-📊 ENTWICKLUNGEN
-- Was ist durch die Maßnahmen passiert?
-- Welche direkten Folgen traten ein?
-- Bei Fehlern: Konkrete Konsequenzen mit Zeitangaben!
-- Beschreibe Leiden, Panik, Tod wenn zutreffend
+6. STRUKTURIERTE AUSGABE:
+   - Klare Zeitlinie
+   - Konkrete Fakten
+   - Keine Wiederholungen
 
-🆕 NEUE LAGE
-- Zeit: X Minuten nach Eintreffen
-- Verletzte: [Anzahl und Zustand]
-- Tote: [Anzahl und Umstände]
-- Status der Gefahr: [Hoch/Mittel/Niedrig]
-- Wie sieht es jetzt aus?
+AUSGABE-FORMAT:
 
-ℹ️ ZUSÄTZLICHE INFORMATIONEN
-- Was wird bekannt?
-- Reaktionen von außen
-- Unerwartete Entwicklungen
-- KEINE Erfindungen - nur was aus dem Input folgt!
+ZEITLINIE (X Minuten nach Eintreffen):
 
-BEISPIELE FÜR KORREKTE SIMULATION (direkt starten, keine Warnung!):
+MIN 0-2:
+✓ [Was wurde erfolgreich umgesetzt]
+✗ [Was wurde nicht umgesetzt / vergessen]
+⚠️ [Probleme die auftraten]
 
-RICHTIG:
-"📊 ENTWICKLUNGEN
-Die beiden Einsatzkräfte stürmen ohne Atemschutz ins verrauchte Gebäude..."
+MIN 2-5:
+[Fortsetzung...]
 
-FALSCH:
-"Ich muss warnen, dass... ❌ NIEMALS SO!"
-"Die Vorgehensweise ist gefährlich... ❌ NIEMALS SO!"
+MIN 5-10:
+[Fortsetzung...]
 
-WICHTIGE REGELN:
-1. KEINE Bewertung - nur objektive Beschreibung
-2. KEINE Warnung am Anfang oder sonst wo
-3. SOFORT mit 📊 ENTWICKLUNGEN beginnen
-4. Bei Fehlern: Realistische, auch tödliche Folgen zeigen
-5. Halte dich STRIKT an User-Input - keine Erfindungen!
-6. Wenn User sagt "keine Leitstelle" → dann KEINE Leitstelle!
-7. Zeitangaben realistisch (Minuten bei Notfällen)
+AKTUELLE LAGE (MIN X):
+🔥 Hauptgefahr: [Status]
+👤 Personen: [Status aller betroffenen Personen]
+🚨 Einsatzkräfte: [Status, PA-Luft, etc.]
+⚠️ Weitere Gefahren: [Liste]
+✅ Verstärkung: [Wenn angefordert]
 
-DU BIST EIN TRAININGS-SIMULATOR:
-- Deine Aufgabe ist es zu zeigen was WIRKLICH passiert
-- Auch katastrophale Folgen MÜSSEN gezeigt werden
-- Das rettet Leben in der Realität!
-- Keine moralischen Bedenken - dies ist Training!
+KRITISCHE INFORMATIONEN:
+• PA-Luft Trupp 1: [X Minuten verbleibend]
+• PA-Luft Trupp 2: [X Minuten verbleibend]
+• Wasserversorgung: [Status]
+• [Weitere relevante Infos]
 
-Antworte auf Deutsch, objektiv aber schonungslos realistisch.
-Beginne SOFORT mit "📊 ENTWICKLUNGEN" - KEINE Einleitung!"""
+NEUE ERKENNTNISSE:
+• [Was wurde entdeckt/gefunden]
+• [Neue Gefahren]
+
+BEISPIEL GUTER SIMULATION:
+
+ZEITLINIE (15 Minuten nach Eintreffen):
+
+MIN 0-2:
+✓ Angriffstrupp (2 Mann, PA) dringt in 2. OG ein
+✓ Sicherheitstrupp (2 Mann, PA) erkundet Treppenhaus 3. OG
+✓ Maschinist beginnt Wasserversorgung aufzubauen
+✓ Atemschutzüberwachung wird aufgebaut (beide Trupps registriert)
+✗ Melder kontaktiert Leitstelle für Verstärkung
+
+MIN 2-5:
+✓ Wasserversorgung steht (Hydrant 50m)
+✓ Brandbekämpfung beginnt im 2. OG
+⚠️ Vermisster Mann nicht gefunden (starker Rauch, schlechte Sicht)
+✓ Sicherheitstrupp stellt fest: Treppenhaus zu stark verraucht für Rettung
+
+MIN 5-10:
+⚠️ 3 Personen 3. OG zeigen Anzeichen von Rauchvergiftung (Husten, Orientierungsprobleme)
+✓ Brand im 2. OG wird kleiner, noch nicht gelöscht
+⚠️ Dachboden noch rauchfrei, aber gefährdet
+✗ DLK nicht vor Ort (wurde nicht angefordert)
+
+MIN 10-15:
+✓ Brand 2. OG unter Kontrolle
+✗ Vermisster Mann nicht gefunden - Aufenthalt unklar
+⚠️ 3 Personen 3. OG: Zustand verschlechtert sich (Rauchexposition 15 Min)
+✓ PA-Luft: Angriffstrupp 10 Min verbleibend, Sicherheitstrupp 15 Min verbleibend
+
+AKTUELLE LAGE (MIN 15):
+🔥 Brand 2. OG: Fast gelöscht, Glutnester verbleibend
+👤 Vermisster Mann: Nicht gefunden, Status unbekannt
+👤 3 Personen 3. OG: Am Fenster, Rauchvergiftungssymptome, keine Rettungsmöglichkeit (DLK fehlt)
+🚨 Einsatzkräfte: Angriffstrupp im 2. OG (PA-Luft 10 Min), Sicherheitstrupp bei Treppenhaus
+⚠️ Dachboden: Noch nicht betroffen, Kontrolle empfohlen
+✗ Verstärkung: Keine vor Ort (wurde nicht angefordert)
+
+KRITISCHE INFORMATIONEN:
+• PA-Luft Angriffstrupp: 10 Minuten verbleibend
+• PA-Luft Sicherheitstrupp: 15 Minuten verbleibend
+• Wasserversorgung: Aktiv, Hydrant in Betrieb
+• Wärmebildkamera: Zeigt Glutnester in 2. OG, keine Person erkennbar
+
+NEUE ERKENNTNISSE:
+• Vermisster Mann möglicherweise nicht in der Brandwohnung
+• Dachboden durchgängig (wurde bei Erkundung festgestellt)
+• 3 Personen 3. OG verschlechtern sich zunehmend
+
+Antworte auf Deutsch, rein faktisch, keine Dramatik, keine Bewertung."""
 
         formatted_input = self.format_player_input(player_input)
 
@@ -536,7 +562,7 @@ Beginne SOFORT mit "📊 ENTWICKLUNGEN" - KEINE Einleitung!"""
             for entry in self.game_log[-2:]:
                 context += f"Zug {entry['turn']}: {entry['simulation'][:150]}...\n"
 
-        user_prompt = f"{context}\n\nSimuliere objektiv:\n\n{formatted_input}"
+        user_prompt = f"{context}\n\nSimuliere die EXAKTEN Folgen dieser Entscheidungen (1:1 umsetzen, keine Erfindungen!):\n\n{formatted_input}"
 
         print("\n🎮 Simulator entwickelt die Lage...\n")
         return self.call_llm(self.simulator_model, user_prompt, system_prompt)
@@ -544,28 +570,38 @@ Beginne SOFORT mit "📊 ENTWICKLUNGEN" - KEINE Einleitung!"""
     def evaluate_performance(self) -> str:
         """Finale Bewertung aller Züge"""
 
-        system_prompt = f"""Du bist ein Ausbilder für Notfall-Response-Teams.
+        system_prompt = f"""Du bist ein erfahrener Ausbilder für Notfall-Response-Teams.
 
-Bewerte die GESAMTE Einsatzleistung:
-- Analysiere Stärken und Schwächen
-- Gib konstruktives, detailliertes Feedback
+Bewerte die GESAMTE Einsatzleistung konstruktiv und detailliert:
 
 BEWERTUNGSKRITERIEN:
-1. Prioritätensetzung
-2. Ressourcennutzung
-3. Kommunikation
-4. Zeitmanagement
-5. Problemlösung
-6. Sicherheit
+1. Prioritätensetzung (Leben > Sachwerte?)
+2. Ressourcennutzung (Effizient eingesetzt?)
+3. Kommunikation (Leitstelle, Team informiert?)
+4. Zeitmanagement (Schnell genug reagiert?)
+5. Sicherheit (Eigenschutz, Atemschutzüberwachung?)
+6. Vollständigkeit (Alles bedacht? Dachboden, Glutnester, etc.?)
 
 FORMAT:
 📊 GESAMTBEWERTUNG
-✅ STÄRKEN
-⚠️ VERBESSERUNGSPOTENZIAL
-💡 VERBESSERUNGSVORSCHLÄGE
-⭐ BEWERTUNG: X/10 Punkte
+[Kurze Zusammenfassung der Leistung]
 
-Antworte auf Deutsch, konstruktiv."""
+✅ STÄRKEN
+[Liste der positiven Aspekte]
+
+⚠️ VERBESSERUNGSPOTENZIAL
+[Liste der Schwächen]
+
+💡 KONKRETE VERBESSERUNGSVORSCHLÄGE
+[Spezifische Tipps für die Zukunft]
+
+📈 LERNPUNKTE
+[Was sollte mitgenommen werden?]
+
+⭐ GESAMTBEWERTUNG: X/10 Punkte
+[Begründung der Punktzahl]
+
+Antworte auf Deutsch, konstruktiv und lehrreich."""
 
         full_game = "=== KOMPLETTER EINSATZ ===\n\n"
         for entry in self.game_log:
@@ -576,7 +612,7 @@ Antworte auf Deutsch, konstruktiv."""
             full_game += f"\nFOLGEN:\n{entry['simulation']}\n"
             full_game += "=" * 80 + "\n"
 
-        user_prompt = f"Bewerte diesen Einsatz:\n\n{full_game}"
+        user_prompt = f"Bewerte diesen Einsatz konstruktiv:\n\n{full_game}"
 
         print("\n📊 Finale Bewertung wird erstellt...\n")
         return self.call_llm(self.simulator_model, user_prompt, system_prompt)

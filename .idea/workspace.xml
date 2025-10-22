@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e7d98ad-39e3-4051-a40e-a7d027330ae8" name="Changes" comment="DeepSeek, aktuell werden verschieden gute Szenarien getestet. Analyse ist noch zu beurteilend">
+    <list default="true" id="0e7d98ad-39e3-4051-a40e-a7d027330ae8" name="Changes" comment="Funzt, und die KIs machen ihren Job">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emergency_simulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/emergency_simulator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +83,7 @@
       <workItem from="1760950149932" duration="1426000" />
       <workItem from="1760951606972" duration="17429000" />
       <workItem from="1761053049607" duration="9227000" />
-      <workItem from="1761114967083" duration="8056000" />
+      <workItem from="1761114967083" duration="9166000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -118,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761120535085</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Funzt, und die KIs machen ihren Job">
+      <option name="closed" value="true" />
+      <created>1761126140474</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1761126140474</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,7 +134,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init" />
     <MESSAGE value="DeepSeek, aktuell werden verschieden gute Szenarien getestet. Analyse ist noch zu beurteilend" />
-    <option name="LAST_COMMIT_MESSAGE" value="DeepSeek, aktuell werden verschieden gute Szenarien getestet. Analyse ist noch zu beurteilend" />
+    <MESSAGE value="Funzt, und die KIs machen ihren Job" />
+    <option name="LAST_COMMIT_MESSAGE" value="Funzt, und die KIs machen ihren Job" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/decision_gAIme$main.coverage" NAME="main Coverage Results" MODIFIED="1760951231776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
